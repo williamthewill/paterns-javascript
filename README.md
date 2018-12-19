@@ -14,21 +14,21 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 -   Use padrões do ES6+
     > Muita coisa do ES5 foi melhorada para que a liguagem ficasse mais versátil e segura, portanto padrões antigos não se aplicam mais as novas versões, logo evite seguir padrões de versões antigas que conflitem com as novas.
 
-         ```js
-          //ruim
-          var obj = {}
+    ```js
+    //ruim
+    var obj = {}
 
-          //bom
-          let obj = {}
+    //bom
+    let obj = {}
 
-          //bom
-          const obj = {}
-          ```
+    //bom
+    const obj = {}
+    ```
 -   Nunca mais use var
 
     > A partir das ultimas versões os browser já suportam let e const,a ecma implementou o let para sanar problemas de escopo que aconteciam quando se declarava com var, então não tem mais porque usar var.
 
-          ```js
+```js
           //ruim
           var obj = {}
 
@@ -37,22 +37,22 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
           //bom
           const obj = {}
-          ```
+ ```
 -   Objeto sem new
     
     > Use a sintaxe literal  pra criação de objetos. eslint: [`no-new-object`](https://eslint.org/docs/rules/no-new-object.html)
 
-        ```javascript
+```javascript
             // ruim
             const item = new Object()
 
             // bom
             const item = {}
-        ```
+```
 - Use nome de propriedade computadas ao invés de criar propriedades nomes de              dinamicamente (Computed property names (ES2015))
     > Criar propriedades com nome dinamico dentro do objeto centraliza sua propriedades conhecidas, faça diferente a menos que seja estritamente necessário
 
-        ```js
+```js
 
             function getKey(k) {
                 return `a key named ${k}`
@@ -72,11 +72,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
                 name: 'San Francisco',
                 [getKey('enabled')]: true,
             }
-        ```
+ ```
 - Shorthand property names (ES2015)
     > Notação ES6 para nomes de propriedades. (eslint: [`object-shorthand`](https://eslint.org/docs/rules/object-shorthand.html))
 
-        ```js
+```js
             //ruim
             let a = 'foo', b = 42, c = {}
             let o = {
@@ -88,10 +88,10 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             //bom
             let a = 'foo', b = 42, c = {}
             let o = {a, b, c}
-        ```
+```
 - Shorthand method names (ES2015)
     > Notação ES6 para nomes de metodods
-        ```js
+```js
             //ruim
             let o = {
                 property: function (parameters) {}
@@ -100,11 +100,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             let o = {
                 property(parameters) {}
             }
-        ```
+```
 - Propriedades Shorthand agrupada
     > Agrupando as propiedades shorthand a leitura se torna mais intuitiva
 
-        ```js
+```js
             const anakinSkywalker = 'Anakin Skywalker'
             const lukeSkywalker = 'Luke Skywalker'
 
@@ -127,11 +127,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
                 episodeThree: 3,
                 mayTheFourth: 4
             }
-        ```
+```
 - Objetos quoted-props
     > Torna a leitura mais fácil. Ele melhora o realce de sintaxe e também é mais facilmente otimizado por muitos mecanismos JS. (eslint: [`quote-props`](https://eslint.org/docs/rules/quote-props.html))
 
-        ```js
+```js
              // ruim
             const bad = {
                 'foo': 3,
@@ -145,11 +145,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
                 bar: 4,
                 'data-blah': 5
             }
-        ```
+```
 - rest-spread
     > Prefira utilizar o operador spread ao invés de object.assign. ((https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign))
 
-        ```js
+```js
             // bem ruim
             const original = { a: 1, b: 2 }
             const copy = Object.assign(original, { c: 3 })
@@ -164,21 +164,21 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             const copy = { ...original, c: 3 }
 
             const { a, ...noA } = copy
-        ```
+```
 - arrays--literals
     > Use a sintaxe literal para ciração de arrays, os motores dos browser renderizam mais rápido. (eslint: [`no-array-constructor`](https://eslint.org/docs/rules/no-array-constructor.html))
 
-        ```js
+ ```js
             // ruim
             const items = new Array()
 
             // bom
             const items = []
-        ```
+ ```
 - utilize array spreads para copiar arrays
     > O operador rest-spread do ES6 trouxe muitas facilidades, porque não usar
 
-        ```js
+ ```js
             // ruim
             const len = items.length
             const itemsCopy = []
@@ -190,11 +190,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             // bom
             const itemsCopy = [...items]
-        ```
+ ```
 - destructuring--object
     > Utilize o desestruturador de objeto porque ele cria uma referencia temporária das propriedades. (eslint: [`prefer-destructuring`](https://eslint.org/docs/rules/prefer-destructuring))
 
-        ```js
+ ```js
             // ruim
             function getFullName(user) {
                 const firstName = user.firstName
@@ -213,11 +213,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             function getFullName({ firstName, lastName }) {
                 return `${firstName} ${lastName}`
             }
-        ```
+```
 - Utilize sempre aspas simples para strings
     > Como conveção ja à muito tempo é recomendável utilizar sempre aspas simples. (strings. eslint: [`quotes`](https://eslint.org/docs/rules/quotes.html))
 
-        ```js
+```js
             // ruim
             const name = "Capt. Janeway"
 
@@ -226,11 +226,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             // bom
             const name = 'Capt. Janeway'
-        ```
+```
 - Não quebre string com mais de 100 caracteres em novas linhas
     > Quebrar concatenar strings é muito custoso, por isso evite sempre que puder
 
-        ```js
+```js
             // ruim
             const errorMessage = 'This is a super long error that was thrown because \
             of Batman. When you stop to think about how Batman had anything to do \
@@ -244,11 +244,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             // bom
             const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-        ```
+```
 - Templates literais
     > Use e abuse de templates literais, eles  fornecem uma sintaxe legível e concisa com recursos de novas linhas e interpolação de strings adequados. (eslint: [`prefer-template`](https://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](https://eslint.org/docs/rules/template-curly-spacing))
 
-        ```js
+```js
             // ruim
             function sayHi(name) {
                 return 'How are you, ' + name + '?'
@@ -268,12 +268,12 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             function sayHi(name) {
                 return `How are you, ${name}?`
             }
-        ```
+```
 - Utilize eval somente em casos extremos
     > eval é extremamente custoso e pode gerar sérios problemas de segurança no seu sistema. (eslint: [`no-eval`](https://eslint.org/docs/rules/no-eval))
 - Parâmetros default
     > Atribua valores default sempre na assinatura da função
-        ```js
+```js
             // muito ruim
             function handleThings(opts) {
                 // Não! Não devemos alterar argumentos de função.
@@ -291,11 +291,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             // bom
             function handleThings(opts = {}) {}
-        ```
+```
 - Espaços na assinatura da função
     > Mantenha a concistencia das assinaturas de suas funções. (eslint: [`space-before-function-paren`](https://eslint.org/docs/rules/space-before-function-paren) [`space-before-blocks`](https://eslint.org/docs/rules/space-before-blocks))
 
-        ```js
+```js
             // ruim
             const f = function(){}
             const g = function (){}
@@ -304,11 +304,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             // bom
             const x = function () {}
             const y = function a() {}
-        ```
+```
 - Prefira sempre utilizar parametros nomeados
     > Não é raro desenvolvedores procurarem entender um código lendo-o diretamente em vez de consultar sua documentação. O código nunca mente, ou ele funciona ou não funciona, já uma documentação pode ser incompleta ou até mesmo desatualizada. Nesse sentido, facilitar a leitura é importante não só para terceiros, mas também para quem desenvolve o código.
     
-        ```js
+```js
             // ruim
             const moveFrame = (from, to) => {
                 /*
@@ -327,11 +327,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
             };
 
             move_frame (from="sprite1", to="sprite2")
-        ```
+```
 - Identação de assinatura de função
     > Funções com multiplos parâmetros em suas assinaturas devem ser recuadas exatamente como todas as outras listas de múltiplas linhas neste guia: com cada item em uma linha sozinho, com uma vírgula final no último item. (eslint: [`function-paren-newline`](https://eslint.org/docs/rules/function-paren-newline))
 
-        ```js
+```js
             // ruim
             function foo(bar,
                         baz,
@@ -359,11 +359,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
                 bar,
                 baz,
             )
-        ```
+```
 - Classes
     > Utilize classes sempre que precisar manipular o prototype do objeto. Classes são mais concisas e fáceis de entender.
 
-        ```js
+```js
             // ruim
             function Queue(contents = []) {
                 this.queue = [...contents];
@@ -385,11 +385,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
                     return value;
                 }
             }
-        ```
+```
 - Encadeamento de contrutor
     > Metodos podem retornar this, isso pode ser super prático em alguns casos
 
-        ```js
+```js
             // ruim
             Jedi.prototype.jump = function () {
                 this.jumping = true
@@ -419,11 +419,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             const luke = new Jedi()
             luke.jump().setHeight(20)
-        ```
+```
 - Não duplicar imports
     > Um único import para o mesmo caminho. (eslint: [`no-duplicate-imports`](https://eslint.org/docs/rules/no-duplicate-imports))
 
-        ```js
+```js
             // ruim
             import foo from 'foo';
             // … some other imports … //
@@ -431,11 +431,11 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
 
             // bom
             import foo, { named1, named2 } from 'foo'
-        ```
+```
 - Exports sempre imutaveis
     > eslint: [`import/no-mutable-exports`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-mutable-exports.md)
 
-    ```js
+```js
         // ruim
         let foo = 3
         export { foo }
@@ -443,17 +443,17 @@ _Este documento propõe regras de arquitetura e patterns para projetos front-end
         // bom
         const foo = 3
         export { foo }
-    ```
+```
 - Prefira export default
     > Para incentivar que exista apenas um export por arquivo, isso melhora a legibilidade.(eslint: [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md))
 
-    ```js
+```js
         // ruim
         export function foo() {}
 
         // bom
         export default function foo() {}
-    ```
+```
 - Imports sempre no topo do arquivo
     > Manter os imports sempre no topo impede que aja compoertamentos estranhos. (eslint: [`import/first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md))
 
